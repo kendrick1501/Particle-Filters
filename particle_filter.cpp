@@ -1,8 +1,6 @@
-/*
- * particle_filter.cpp
- *
- *  Created on: Dec 12, 2016
- *      Author: Tiffany Huang
+/* Based on particle_filter.cpp
+ * Created on: Dec 12, 2016. 
+ * Author: Tiffany Huang
  */
 
 #include <random>
@@ -47,7 +45,7 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 
 void ParticleFilter::prediction(double delta_t, double std_pos[], double velocity, double yaw_rate) {
 
-	double delta_x;
+    double delta_x;
     double delta_y;
     double theta;
     double v_yawrate = velocity / yaw_rate;
@@ -74,14 +72,6 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
         particles[i].y += delta_y + dist_y(gen);
         particles[i].theta = theta + dist_theta(gen);
 	}
-
-}
-
-void ParticleFilter::dataAssociation(std::vector<LandmarkObs> predicted, std::vector<LandmarkObs>& observations) {
-	// TODO: Find the predicted measurement that is closest to each observed measurement and assign the
-	//   observed measurement to this particular landmark.
-	// NOTE: this method will NOT be called by the grading code. But you will probably find it useful to
-	//   implement this method and use it as a helper during the updateWeights phase.
 
 }
 
