@@ -76,7 +76,9 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
 }
 
 void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
-		std::vector<LandmarkObs> observations, Map map_landmarks) {
+		std::vector<LandmarkObs> observations, Map map_landmarks) { 
+
+//Based on https://github.com/mvirgo/Kidnapped-Vehicle-Project/blob/master/src/particle_filter.cpp
 
     int num_landmarks = map_landmarks.landmark_list.size();
 	int num_observations = observations.size();
@@ -131,13 +133,13 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 
 void ParticleFilter::resample() {
 
-	std::default_random_engine gen; gen.seed(123);
-    std::discrete_distribution<> dist_particles(weights.begin(), weights.end());
+	std::default_random_engine gen;
+    std::discrete_distribution<> dist_part(weights.begin(), weights.end());
     vector<Particle> particles_;
 
     particles_.resize(num_particles);
     for (int i = 0; i < num_particles; i++) {
-        particles_[i] = particles[dist_particles(gen)];
+        particles_[i] = particles[dist_part(gen)];
     }
     particles = particles_;
 }
